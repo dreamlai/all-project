@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人项目展览</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div class="container" id="app">
+        <header>
+            <div class="loading" :style="{ width:　barWidth + '%' }" v-show="isShow"></div>
+            <ul class="model-tab">
+                <li v-for="(item, index) in projects" class="item" :key="item.name" :class="[{ active: tabIndex === index }]" v-on:click="tabSwitch(index)">{{ item.name }}</li>
+            </ul>
+            <div class="navbar">
+                <ul class="demo-list">
+                    <li v-for="(item, index) in projects[tabIndex].data" class="item" :class="[{ active: navIndex === index }]" v-on:click="change(index, item.url)" :key="item.data" :title="item.describe">{{ item.name }}</li>
+                </ul>
+            </div>
+            <div class="control">
+                <a href="https://www.dreamlai.com" class="home">主页</a>
+                <a :href="ifrUrl" class="fa fa-share-square-o jume" target="_blank"></a>
+            </div>
+        </header>
+        <div class="main" :class="[{ mobile : tabIndex === 1 }]">
+            <iframe frameborder="0" width="100%" class="iframe" :src="ifrUrl" v-on:load="load" :style="{ height: ifrHeight + '%' }"></iframe>
+        </div>
+        <footer>
+
+        </footer>
+    </div>
+    <script src="js/main.js?ver=2.0"></script>
+</body>
+</html>
